@@ -1,0 +1,163 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f7f5ef;
+  color: #293d33;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+header,
+footer {
+  padding: 18px 8%;
+  background: #315d4a;
+  color: white;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  margin: 0;
+  font-size: 22px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  width: min(100% - 32px, 1000px);
+  min-height: 70vh;
+  margin: 35px auto;
+}
+
+h1,
+h2,
+h3 {
+  color: #315d4a;
+}
+
+.destaque {
+  padding: 45px;
+  border-radius: 12px;
+  background: #e4ecdf;
+}
+
+.destaque h1 {
+  margin-top: 0;
+  font-size: 38px;
+}
+
+.botao,
+button {
+  padding: 10px 15px;
+  border: 0;
+  border-radius: 5px;
+  background: #315d4a;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button:hover,
+.botao:hover {
+  background: #244535;
+}
+
+.cartoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.cartao,
+.caixa {
+  padding: 18px;
+  border: 1px solid #d8ded5;
+  border-radius: 8px;
+  background: white;
+}
+
+.cartao h3 {
+  margin-top: 0;
+}
+
+form {
+  max-width: 500px;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #d8ded5;
+  border-radius: 8px;
+  background: white;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #b9c5ba;
+  border-radius: 5px;
+}
+
+form button {
+  margin-top: 16px;
+}
+
+.linha-livro {
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #d8ded5;
+}
+
+.linha-livro button {
+  flex-shrink: 0;
+  background: #9c493e;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #d8ded5;
+  text-align: left;
+}
+
+th {
+  background: #e4ecdf;
+}
+
+footer {
+  text-align: center;
+}

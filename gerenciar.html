@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gerenciar acervo | Cantinho da Leitura</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <p class="logo">📚 Cantinho da Leitura</p>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="livros.html">Livros</a>
+      <a href="gerenciar.html">Gerenciar</a>
+      <a href="relatorio.html">Relatório</a>
+      <a href="conta.html">Conta</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Gerenciar acervo</h1>
+    <p>Adicione um livro ou remova um título existente.</p>
+    <form id="form-livro">
+      <label for="titulo">Título do livro</label>
+      <input id="titulo" required>
+      <label for="autor">Autor</label>
+      <input id="autor" required>
+      <label for="categoria">Categoria</label>
+      <select id="categoria" required>
+        <option value="">Escolha uma categoria</option>
+        <option>Fantasia</option>
+        <option>Aventura</option>
+        <option>Romance</option>
+        <option>Ficção</option>
+        <option>Infantil</option>
+        <option>Outro</option>
+      </select>
+      <button type="submit">Adicionar livro</button>
+    </form>
+    <section class="caixa">
+      <h2>Livros cadastrados</h2>
+      <p id="total-livros"></p>
+      <div id="lista-gerenciar"></div>
+    </section>
+  </main>
+  <footer>Projeto escolar feito com HTML, CSS, JavaScript e LocalStorage.</footer>
+</body>
+</html>

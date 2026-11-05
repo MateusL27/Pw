@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conta | Cantinho da Leitura</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <p class="logo">📚 Cantinho da Leitura</p>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="livros.html">Livros</a>
+      <a href="gerenciar.html">Gerenciar</a>
+      <a href="relatorio.html">Relatório</a>
+      <a href="conta.html">Conta</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Minha conta</h1>
+    <p>Faça seu cadastro ou entre com o e-mail cadastrado.</p>
+    <div class="cartoes">
+      <form id="form-cadastro">
+        <h2>Criar cadastro</h2>
+        <label for="nome">Nome</label>
+        <input id="nome" required>
+        <label for="email-cadastro">E-mail</label>
+        <input id="email-cadastro" type="email" required>
+        <label for="senha-cadastro">Senha</label>
+        <input id="senha-cadastro" type="password" required>
+        <button type="submit">Cadastrar</button>
+      </form>
+      <form id="form-login">
+        <h2>Entrar</h2>
+        <label for="email-login">E-mail</label>
+        <input id="email-login" type="email" required>
+        <label for="senha-login">Senha</label>
+        <input id="senha-login" type="password" required>
+        <button type="submit">Entrar</button>
+        <p id="mensagem-login"></p>
+      </form>
+    </div>
+    <section id="boas-vindas" class="caixa" hidden>
+      <h2 id="nome-usuario"></h2>
+      <button id="sair" type="button">Sair</button>
+    </section>
+    <p>Exercício de front-end: as senhas não são verificadas nem salvas.</p>
+  </main>
+  <footer>Projeto escolar feito com HTML, CSS, JavaScript e LocalStorage.</footer>
+</body>
+</html>
