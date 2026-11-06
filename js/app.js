@@ -24,6 +24,7 @@ function salvarLivros(livros) {
 }
 
 function criarCartao(livro) {
+  // Monta no HTML um cartão com o título, autor e categoria do livro.
   const cartao = document.createElement("article");
   cartao.className = "cartao";
 
@@ -41,9 +42,11 @@ function criarCartao(livro) {
 }
 
 function mostrarLivros(elemento, livros) {
+  // Substitui o conteúdo da área de livros pelos cartões encontrados.
   elemento.innerHTML = "";
 
   if (livros.length === 0) {
+    // Exibe uma mensagem no lugar dos cartões quando não há resultados.
     elemento.textContent = "Nenhum livro cadastrado.";
     return;
   }
@@ -55,6 +58,7 @@ function mostrarLivros(elemento, livros) {
 
 const inicio = document.querySelector("#livros-inicio");
 if (inicio) {
+  // Na página inicial, mostra somente os quatro primeiros livros do acervo.
   mostrarLivros(inicio, carregarLivros().slice(0, 4));
 }
 
@@ -71,6 +75,7 @@ if (catalogo) {
     mostrarLivros(catalogo, livros);
   }
 
+  // Atualiza os cartões do catálogo conforme o texto digitado na busca.
   busca.addEventListener("input", buscarLivros);
   buscarLivros();
 }
@@ -81,6 +86,7 @@ if (formularioLivro) {
 
   function mostrarListaGerenciar() {
     const livros = carregarLivros();
+    // Recria a lista de livros e seus botões de remoção na página.
     lista.innerHTML = "";
 
     livros.forEach(function (livro) {
@@ -98,6 +104,7 @@ if (formularioLivro) {
           return item.id !== livro.id;
         });
         salvarLivros(atualizados);
+        // Atualiza a lista exibida após remover o livro.
         mostrarListaGerenciar();
       });
 
@@ -105,6 +112,7 @@ if (formularioLivro) {
       lista.appendChild(linha);
     });
 
+    // Atualiza no HTML o total de livros cadastrados.
     document.querySelector("#total-livros").textContent = livros.length + " livros";
   }
 
@@ -121,6 +129,7 @@ if (formularioLivro) {
 
     salvarLivros(livros);
     formularioLivro.reset();
+    // Limpa os campos do formulário e atualiza a lista exibida.
     mostrarListaGerenciar();
   });
 
@@ -130,6 +139,7 @@ if (formularioLivro) {
 const tabelaRelatorio = document.querySelector("#tabela-livros");
 if (tabelaRelatorio) {
   const livros = carregarLivros();
+  // Exibe a quantidade de livros e preenche a tabela com os dados do acervo.
   document.querySelector("#total-relatorio").textContent = livros.length;
 
   livros.forEach(function (livro) {
@@ -151,6 +161,7 @@ const boasVindas = document.querySelector("#boas-vindas");
 
 if (formularioCadastro && formularioLogin) {
   function mostrarBoasVindas(usuario) {
+    // Esconde cadastro e login e mostra a saudação com o nome do usuário.
     formularioCadastro.hidden = true;
     formularioLogin.hidden = true;
     boasVindas.hidden = false;
@@ -183,11 +194,13 @@ if (formularioCadastro && formularioLogin) {
     if (usuario) {
       mostrarBoasVindas(usuario);
     } else {
+      // Informa no HTML quando o e-mail não está cadastrado.
       document.querySelector("#mensagem-login").textContent = "E-mail não cadastrado. Faça seu cadastro primeiro.";
     }
   });
 
   document.querySelector("#sair").addEventListener("click", function () {
+    // Oculta a saudação e volta a exibir os formulários de conta.
     boasVindas.hidden = true;
     formularioCadastro.hidden = false;
     formularioLogin.hidden = false;
