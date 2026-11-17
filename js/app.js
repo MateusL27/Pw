@@ -1,5 +1,9 @@
 // BLOCO 1 — Chaves e dados iniciais
-// Os livros ficam salvos no navegador.
+/*
+ * As constantes guardam os nomes usados para salvar livros e usuários no navegador.
+ * A lista abaixo contém os livros padrão, usada quando ainda não existe um acervo salvo.
+ * Cada livro é um objeto com identificador, título, autor e categoria.
+ */
 const CHAVE_LIVROS = "cantinhoLivros";
 const CHAVE_USUARIOS = "cantinhoUsuarios";
 
@@ -12,6 +16,10 @@ const livrosIniciais = [
 
 // BLOCO 2 — Carregar e salvar livros
 
+/*
+ * carregarLivros busca os dados no localStorage. Se não houver dados, salva e retorna
+ * a lista inicial; caso já existam, converte o texto JSON para objetos JavaScript.
+ */
 function carregarLivros() {
   const dados = localStorage.getItem(CHAVE_LIVROS);
 
@@ -23,14 +31,18 @@ function carregarLivros() {
   return JSON.parse(dados);
 }
 
+// Converte a lista de livros em texto JSON e a salva no armazenamento do navegador.
 function salvarLivros(livros) {
   localStorage.setItem(CHAVE_LIVROS, JSON.stringify(livros));
 }
 
 // BLOCO 3 — Criar e exibir cartões de livros
 
+/*
+ * criarCartao monta um <article> com título, autor e categoria e o retorna pronto
+ * para ser inserido na página.
+ */
 function criarCartao(livro) {
-  // Monta no HTML um cartão com o título, autor e categoria do livro.
   const cartao = document.createElement("article");
   cartao.className = "cartao";
 
@@ -47,12 +59,14 @@ function criarCartao(livro) {
   return cartao;
 }
 
+/*
+ * mostrarLivros limpa a área recebida e exibe uma mensagem se a lista estiver vazia.
+ * Caso contrário, cria e adiciona um cartão para cada livro.
+ */
 function mostrarLivros(elemento, livros) {
-  // Substitui o conteúdo da área de livros pelos cartões encontrados.
   elemento.innerHTML = "";
 
   if (livros.length === 0) {
-    // Exibe uma mensagem no lugar dos cartões quando não há resultados.
     elemento.textContent = "Nenhum livro cadastrado.";
     return;
   }
@@ -64,14 +78,18 @@ function mostrarLivros(elemento, livros) {
 
 // BLOCO 4 — Livros da página inicial
 
+/* Se a página tiver a área de destaque, mostra nela os quatro primeiros livros do acervo. */
 const inicio = document.querySelector("#livros-inicio");
 if (inicio) {
-  // Na página inicial, mostra somente os quatro primeiros livros do acervo.
   mostrarLivros(inicio, carregarLivros().slice(0, 4));
 }
 
 // BLOCO 5 — Busca no catálogo
 
+/*
+ * Na página do catálogo, a busca compara o texto digitado com título, autor e categoria,
+ * sem diferenciar maiúsculas de minúsculas, e atualiza os cartões com os resultados.
+ */
 const catalogo = document.querySelector("#lista-livros");
 if (catalogo) {
   const busca = document.querySelector("#busca");
@@ -85,20 +103,23 @@ if (catalogo) {
     mostrarLivros(catalogo, livros);
   }
 
-  // Atualiza os cartões do catálogo conforme o texto digitado na busca.
+  // Atualiza os resultados ao digitar e também mostra o catálogo ao abrir a página.
   busca.addEventListener("input", buscarLivros);
   buscarLivros();
 }
 
 // BLOCO 6 — Adicionar e remover livros
 
+/*
+ * Na página de gerenciamento, esta função reconstrói a lista e o total de livros.
+ * Cada botão remove seu livro do acervo salvo e atualiza a exibição.
+ */
 const formularioLivro = document.querySelector("#form-livro");
 if (formularioLivro) {
   const lista = document.querySelector("#lista-gerenciar");
 
   function mostrarListaGerenciar() {
     const livros = carregarLivros();
-    // Recria a lista de livros e seus botões de remoção na página.
     lista.innerHTML = "";
 
     livros.forEach(function (livro) {
@@ -116,7 +137,6 @@ if (formularioLivro) {
           return item.id !== livro.id;
         });
         salvarLivros(atualizados);
-        // Atualiza a lista exibida após remover o livro.
         mostrarListaGerenciar();
       });
 
@@ -124,10 +144,13 @@ if (formularioLivro) {
       lista.appendChild(linha);
     });
 
-    // Atualiza no HTML o total de livros cadastrados.
     document.querySelector("#total-livros").textContent = livros.length + " livros";
   }
 
+  /*
+   * Ao enviar o formulário, impede o recarregamento, acrescenta os dados digitados
+   * ao acervo, salva a lista, limpa os campos e atualiza a página.
+   */
   formularioLivro.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
@@ -141,19 +164,22 @@ if (formularioLivro) {
 
     salvarLivros(livros);
     formularioLivro.reset();
-    // Limpa os campos do formulário e atualiza a lista exibida.
     mostrarListaGerenciar();
   });
 
+  // Exibe o acervo atual ao abrir a página de gerenciamento.
   mostrarListaGerenciar();
 }
 
 // BLOCO 7 — Relatório de livros
 
+/*
+ * Se a tabela do relatório existir, exibe o total de livros e cria uma linha para
+ * cada livro, com células para título, autor e categoria.
+ */
 const tabelaRelatorio = document.querySelector("#tabela-livros");
 if (tabelaRelatorio) {
   const livros = carregarLivros();
-  // Exibe a quantidade de livros e preenche a tabela com os dados do acervo.
   document.querySelector("#total-relatorio").textContent = livros.length;
 
   livros.forEach(function (livro) {
@@ -171,19 +197,27 @@ if (tabelaRelatorio) {
 
 // BLOCO 8 — Cadastro e login de usuários
 
+/*
+ * Localiza os elementos da conta e configura cadastro, login e saída somente
+ * quando os formulários estão presentes na página.
+ */
 const formularioCadastro = document.querySelector("#form-cadastro");
 const formularioLogin = document.querySelector("#form-login");
 const boasVindas = document.querySelector("#boas-vindas");
 
 if (formularioCadastro && formularioLogin) {
+  // Esconde os formulários e mostra uma saudação com o nome do usuário.
   function mostrarBoasVindas(usuario) {
-    // Esconde cadastro e login e mostra a saudação com o nome do usuário.
     formularioCadastro.hidden = true;
     formularioLogin.hidden = true;
     boasVindas.hidden = false;
     document.querySelector("#nome-usuario").textContent = "Olá, " + usuario.nome + "!";
   }
 
+  /*
+   * O cadastro lê os campos, adiciona o usuário à lista salva no navegador
+   * e mostra a saudação após concluir.
+   */
   formularioCadastro.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
@@ -199,6 +233,10 @@ if (formularioCadastro && formularioLogin) {
     mostrarBoasVindas(usuario);
   });
 
+  /*
+   * O login procura um usuário com e-mail e senha correspondentes; se encontrar,
+   * mostra a saudação. Caso contrário, informa que os dados estão incorretos.
+   */
   formularioLogin.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
@@ -212,13 +250,12 @@ if (formularioCadastro && formularioLogin) {
     if (usuario) {
       mostrarBoasVindas(usuario);
     } else {
-      // Informa no HTML quando o e-mail não está cadastrado.
       document.querySelector("#mensagem-login").textContent = "E-mail ou senha incorretos. Tente novamente.";
     }
   });
 
+  // O botão de saída esconde a saudação e volta a exibir os formulários.
   document.querySelector("#sair").addEventListener("click", function () {
-    // Oculta a saudação e volta a exibir os formulários de conta.
     boasVindas.hidden = true;
     formularioCadastro.hidden = false;
     formularioLogin.hidden = false;
